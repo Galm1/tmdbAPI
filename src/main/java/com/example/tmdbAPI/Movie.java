@@ -11,6 +11,9 @@ public class Movie {
     String overview;
     double popularity;
 
+    public Movie() {
+    }
+
     public String getTitle() {
         return title;
     }
