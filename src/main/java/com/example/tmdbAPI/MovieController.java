@@ -23,7 +23,7 @@ public class MovieController {
         return "medium-popular-long-name";
     }
 
-    @RequestMapping("now-playing")public String nowPlaying(Model model){
+    @RequestMapping("/now-playing")public String nowPlaying(Model model){
 
         List<Movie> movies = new ArrayList<Movie>();
         model.addAttribute("movies", movies);
@@ -40,5 +40,6 @@ public class MovieController {
         return movies;
 
     }
+
 
 }
