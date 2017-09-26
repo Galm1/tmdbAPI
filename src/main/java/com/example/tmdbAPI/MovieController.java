@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,14 +24,20 @@ public class MovieController {
     }
 
     @RequestMapping("now-playing")public String nowPlaying(Model model){
+
+        List<Movie> movies = new ArrayList<Movie>();
+        model.addAttribute("movies", movies);
         return "now-playing";
     }
 
 
     public static List<Movie> getMovies(String route){
 
+        List<Movie> movies = new ArrayList<Movie>();
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getForObject(API_URL, ResultsPage.class);
+
+        return movies;
 
     }
 
