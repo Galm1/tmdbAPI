@@ -6,5 +6,16 @@
 </head>
 <body>
 
+
+<table>
+    <tr th:each="movies : ${movies}">
+        <td th:text="${movies.title}"></td>
+        <td th:text="${movies.overview}"></td>
+        <td>
+            <img width="150" th:src= "'http://image.tmdb.org/t/p/original' + ${movies.poster_path}"/>
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>

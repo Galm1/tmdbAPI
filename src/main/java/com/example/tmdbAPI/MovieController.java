@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.exceptions.TemplateProcessingException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MovieController {
@@ -21,6 +22,12 @@ public class MovieController {
     }
 
     @RequestMapping("/medium-popular-long-name")public String mediumPopularLongName(Model model){
+        List<Movie> movies = getMovies("/medium-popular-long-name");
+        List<Movie> hipster = movies.stream()
+                .filter(i -> i.getPopularity()<80 && i.getPopularity()>30)
+                .filter(i -> i.getTitle().length() >= 10)
+                .collect(Collectors.toList());
+        model.addAttribute("movies", hipster);
         return "medium-popular-long-name";
     }
 
@@ -51,8 +58,9 @@ public class MovieController {
 
         movies = objectGetter.getResults();
         return movies;
-
     }
+
+
 
 
 }
