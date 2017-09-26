@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,14 +26,14 @@ public class MovieController {
 
     @RequestMapping("/now-playing")
     public String nowPlaying(Model model) {
-        String movies = getMovies(API_URL);
+        List<Movie> movies = getMovies("/now-playing");
         model.addAttribute("movies", movies);
 
         return "now-playing";
     }
 
 
-    public static String getMovies(String route){
+    public static List<Movie> getMovies(String route){
 
         List<Movie> movies;
         RestTemplate restTemplate = new RestTemplate();
@@ -49,7 +47,7 @@ public class MovieController {
         }
 
         movies = objectGetter.getResults();
-        return String.valueOf(movies);
+        return movies;
 
     }
 
