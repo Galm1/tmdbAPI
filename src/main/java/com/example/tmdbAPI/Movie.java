@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Movie {
 
     String title;
-    String posterPath;
+    String poster_path;
     String overview;
     double popularity;
 
@@ -22,12 +22,12 @@ public class Movie {
         this.title = title;
     }
 
-    public String getPosterPath() {
-        return posterPath;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 
     public String getOverview() {

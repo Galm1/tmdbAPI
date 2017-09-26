@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class MovieController {
 
             objectGetter = restTemplate.getForObject(API_URL, ResultsPage.class);
         } catch(SpelEvaluationException ex){
+            System.out.println(ex);
+        } catch(TemplateProcessingException ex) {
             System.out.println(ex);
         }
 
