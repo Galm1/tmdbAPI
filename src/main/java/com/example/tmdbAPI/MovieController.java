@@ -1,11 +1,13 @@
 package com.example.tmdbAPI;
 
 
+import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,21 +25,31 @@ public class MovieController {
         return "medium-popular-long-name";
     }
 
-    @RequestMapping("/now-playing")public String nowPlaying(Model model){
 
-        List<Movie> movies = new ArrayList<Movie>();
+    @RequestMapping("/now-playing")
+    public String nowPlaying(Model model) {
+        String movies = getMovies(API_URL);
         model.addAttribute("movies", movies);
+
         return "now-playing";
     }
 
 
-    public static List<Movie> getMovies(String route){
+    public static String getMovies(String route){
 
-        List<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies;
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getForObject(API_URL, ResultsPage.class);
 
-        return movies;
+        ResultsPage objectGetter = new ResultsPage();
+        try{
+
+            objectGetter = restTemplate.getForObject(API_URL, ResultsPage.class);
+        } catch(SpelEvaluationException ex){
+            System.out.println(ex);
+        }
+
+        movies = objectGetter.getResults();
+        return String.valueOf(movies);
 
     }
 
